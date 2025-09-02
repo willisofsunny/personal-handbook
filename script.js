@@ -52,10 +52,12 @@ class LanguageManager {
                 element.textContent = translation;
             }
             
-            // Handle tooltip attributes
-            const tooltipTranslation = element.dataset[datasetKey];
-            if (tooltipTranslation && element.hasAttribute('data-tooltip')) {
-                element.setAttribute('data-tooltip', tooltipTranslation);
+            // Handle tooltip attributes separately
+            if (element.hasAttribute('data-tooltip')) {
+                const tooltipTranslation = element.dataset[datasetKey];
+                if (tooltipTranslation) {
+                    element.setAttribute('data-tooltip', tooltipTranslation);
+                }
             }
         });
 
