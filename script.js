@@ -51,6 +51,12 @@ class LanguageManager {
             if (translation) {
                 element.textContent = translation;
             }
+            
+            // Handle tooltip attributes
+            const tooltipTranslation = element.dataset[datasetKey];
+            if (tooltipTranslation && element.hasAttribute('data-tooltip')) {
+                element.setAttribute('data-tooltip', tooltipTranslation);
+            }
         });
 
         // Update document language
