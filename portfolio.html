@@ -830,59 +830,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Multi-language support for portfolio page
-        function switchLanguage(lang) {
-            const elements = document.querySelectorAll('[data-zh-TW], [data-zh-CN], [data-en]');
-            elements.forEach(element => {
-                const text = element.getAttribute('data-' + lang);
-                if (text) {
-                    if (element.tagName === 'INPUT' && element.type === 'text') {
-                        element.placeholder = text;
-                    } else {
-                        element.textContent = text;
-                    }
-                }
-            });
-            
-            // Update tooltip for floating button if exists
-            const floatingBtn = document.querySelector('.floating-portfolio-btn');
-            if (floatingBtn) {
-                const tooltipText = floatingBtn.getAttribute('data-' + lang);
-                if (tooltipText) {
-                    floatingBtn.setAttribute('data-tooltip', tooltipText);
-                }
-            }
-        }
-
-        // Initialize language switching
-        document.addEventListener('DOMContentLoaded', function() {
-            const langBtns = document.querySelectorAll('.lang-btn');
-            langBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    
-                    // Update active button
-                    langBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Switch language
-                    switchLanguage(lang);
-                    
-                    // Save language preference
-                    localStorage.setItem('preferredLanguage', lang);
-                });
-            });
-            
-            // Load saved language preference
-            const savedLang = localStorage.getItem('preferredLanguage') || 'zh-TW';
-            const activeBtn = document.querySelector(`[data-lang="${savedLang}"]`);
-            if (activeBtn) {
-                langBtns.forEach(b => b.classList.remove('active'));
-                activeBtn.classList.add('active');
-                switchLanguage(savedLang);
-            }
-        });
-    </script>
 </body>
 </html>
