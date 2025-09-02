@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>許智宣 - 作品集 | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Portfolio specific styles */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        /* Project Category Badges */
+        .project-category-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        
+        .ai-badge {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(5, 150, 105, 0.9));
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        .design-badge {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(124, 58, 237, 0.9));
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+        }
+        
+        .portfolio-header {
+            position: relative;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+        }
+        
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+        
+        .portfolio-header {
+            padding: 32px 32px 24px;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .portfolio-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .portfolio-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .portfolio-subtitle {
+            color: #64748b;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .portfolio-content {
+            padding: 32px;
+        }
+        
+        .portfolio-description {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .portfolio-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-tag:hover {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .portfolio-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .portfolio-link {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .portfolio-link.primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+        
+        .portfolio-link.primary:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+        }
+        
+        .portfolio-link.secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .portfolio-link.secondary:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+        
+        .back-to-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 12px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-to-home:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .coding-portfolio {
+            border-left: 4px solid #10b981;
+        }
+        
+        .coding-portfolio .portfolio-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .design-portfolio {
+            border-left: 4px solid #8b5cf6;
+        }
+        
+        .design-portfolio .portfolio-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        
+        /* Highlights Section Styles */
+        .highlights-section {
+            margin-top: 100px;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlights-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(59,130,246,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            pointer-events: none;
+        }
+        
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+        }
+        
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--highlight-color);
+        }
+        
+        .highlight-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 20px;
+            background: var(--highlight-color);
+            box-shadow: 0 8px 24px var(--highlight-shadow);
+        }
+        
+        .highlight-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .highlight-subtitle {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        
+        .highlight-description {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .highlight-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .highlight-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .highlights-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .portfolio-links {
+                flex-direction: column;
+            }
+            
+            .portfolio-link {
+                flex: none;
+                min-width: auto;
+            }
+            
+            .back-to-home {
+                top: 10px;
+                left: 10px;
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .highlights-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 28px;
+            }
+        }
+        
+        /* Avatar styles for portfolio page */
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="zh-TW">
+            <i class="fas fa-flag"></i> 繁體中文
+        </button>
+        <button class="lang-btn" data-lang="zh-CN">
+            <i class="fas fa-flag"></i> 简体中文
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <i class="fas fa-flag"></i> English
+        </button>
+    </div>
+
+    <!-- Back to Home Link -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        <span data-zh-TW="返回說明頁" data-zh-CN="返回说明页" data-en="Back to Profile">返回說明頁</span>
+    </a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="image/头像.PNG" alt="許智宣" class="avatar">
+                </div>
+                <div class="profile-info">
+                    <h1 class="name" data-zh-TW="許智宣 作品集" data-zh-CN="许智宣 作品集" data-en="Xu Zhixuan Portfolio">許智宣 作品集</h1>
+                    <h2 class="title" data-zh-TW="AI編程作品 & Mockup設計" data-zh-CN="AI编程作品 & Mockup设计" data-en="AI Programming & Mockup Design">AI編程作品 & Mockup設計</h2>
+                    <p class="tagline" data-zh-TW="展示我的AI應用能力與設計思維" data-zh-CN="展示我的AI应用能力与设计思维" data-en="Showcasing my AI application capabilities and design thinking">展示我的AI應用能力與設計思維</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Portfolio Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title" data-zh-TW="作品展示" data-zh-CN="作品展示" data-en="Portfolio Showcase">作品展示</h2>
+                
+                <div class="portfolio-grid">
+                    <!-- AI_POC Project -->
+                    <div class="portfolio-item coding-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="project-category-badge ai-badge">
+                                <i class="fas fa-code"></i>
+                                <span data-zh-TW="AI編程" data-zh-CN="AI编程" data-en="AI Programming">AI編程</span>
+                            </div>
+                            <h3 class="portfolio-title">AI_POC</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="AI技術概念驗證項目" data-zh-CN="AI技术概念验证项目" data-en="AI Technology Proof of Concept">AI技術概念驗證項目</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description" data-zh-TW="展示AI技術在實際應用中的概念驗證，通過創新的AI解決方案來解決實際問題。" data-zh-CN="展示AI技术在实际应用中的概念验证，通过创新的AI解决方案来解决实际问题。" data-en="Demonstrating AI technology proof of concept in real-world applications, solving practical problems through innovative AI solutions.">
+                                展示AI技術在實際應用中的概念驗證，通過創新的AI解決方案來解決實際問題。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag" data-zh-TW="AI技術" data-zh-CN="AI技术" data-en="AI Tech">AI技術</span>
+                                <span class="portfolio-tag" data-zh-TW="概念驗證" data-zh-CN="概念验证" data-en="Proof of Concept">概念驗證</span>
+                                <span class="portfolio-tag">JavaScript</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://willisofsunny.github.io/AI_POC/" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看項目</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Scripts Collection -->
+                    <div class="portfolio-item coding-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="project-category-badge ai-badge">
+                                <i class="fas fa-code"></i>
+                                <span data-zh-TW="AI編程" data-zh-CN="AI编程" data-en="AI Programming">AI編程</span>
+                            </div>
+                            <h3 class="portfolio-title" data-zh-TW="數據腳本集合" data-zh-CN="数据脚本集合" data-en="Data Scripts Collection">數據腳本集合</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="數據處理與分析工具集" data-zh-CN="数据处理与分析工具集" data-en="Data Processing & Analytics Toolkit">數據處理與分析工具集</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description" data-zh-TW="專業的數據處理腳本集合，提供高效的數據清理、轉換和分析功能，適用於各種數據科學場景。" data-zh-CN="专业的数据处理脚本集合，提供高效的数据清理、转换和分析功能，适用于各种数据科学场景。" data-en="Professional data processing script collection providing efficient data cleaning, transformation and analysis functions for various data science scenarios.">
+                                專業的數據處理腳本集合，提供高效的數據清理、轉換和分析功能，適用於各種數據科學場景。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">數據處理</span>
+                                <span class="portfolio-tag">Python</span>
+                                <span class="portfolio-tag">數據分析</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://947d8a13.dataphoenix.pages.dev/" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看項目</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map Coordinate System -->
+                    <div class="portfolio-item coding-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-map"></i>
+                            </div>
+                            <div class="project-category-badge ai-badge">
+                                <i class="fas fa-code"></i>
+                                <span data-zh-TW="AI編程" data-zh-CN="AI编程" data-en="AI Programming">AI編程</span>
+                            </div>
+                            <h3 class="portfolio-title" data-zh-TW="坐標轉換工具" data-zh-CN="坐标转换工具" data-en="Coordinate Converter">坐標轉換工具</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="地圖坐標系統轉換工具" data-zh-CN="地图坐标系统转换工具" data-en="Map Coordinate System Converter">地圖坐標系統轉換工具</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description" data-zh-TW="專業的地圖坐標轉換工具，支援多種坐標系統之間的精確轉換，為地理信息系統開發提供便利。" data-zh-CN="专业的地图坐标转换工具，支持多种坐标系统之间的精确转换，为地理信息系统开发提供便利。" data-en="Professional map coordinate conversion tool supporting precise conversion between multiple coordinate systems, facilitating GIS development.">
+                                專業的地圖坐標轉換工具，支援多種坐標系統之間的精確轉換，為地理信息系統開發提供便利。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">GIS</span>
+                                <span class="portfolio-tag">坐標轉換</span>
+                                <span class="portfolio-tag">Web工具</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://willisofsunny.github.io/map-coordinate-system/" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看項目</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meow Tarot -->
+                    <div class="portfolio-item design-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-cat"></i>
+                            </div>
+                            <div class="project-category-badge design-badge">
+                                <i class="fas fa-cube"></i>
+                                <span data-zh-TW="產品作品" data-zh-CN="产品作品" data-en="Product Work">產品作品</span>
+                            </div>
+                            <h3 class="portfolio-title">Meow Tarot</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="塔羅占卜微信H5應用" data-zh-CN="塔罗占卜微信H5应用" data-en="Tarot WeChat H5 App">塔羅占卜微信H5應用</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description">
+                                基於微信生態的H5塔羅占卜產品，通過Figma和Midjourney完成整體視覺設計，核心目標是提供免費塔羅占卜服務吸引用戶。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">H5應用</span>
+                                <span class="portfolio-tag">UI/UX設計</span>
+                                <span class="portfolio-tag">微信生態</span>
+                                <span class="portfolio-tag">Figma</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://www.figma.com/file/X6DjMotnmUV3YGiCskXMjN/%E5%96%B5%E5%96%B5Tarot?type=design&node-id=370%3A2&mode=design&t=WQlJ8C4KAFqoyz9n-1" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看設計稿</span>
+                                </a>
+                                <a href="https://prod-4goyo08sdb4349f8-1320634800.tcloudbaseapp.com/" class="portfolio-link secondary" target="_blank">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>體驗產品</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smark -->
+                    <div class="portfolio-item design-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fab fa-bitcoin"></i>
+                            </div>
+                            <div class="project-category-badge design-badge">
+                                <i class="fas fa-cube"></i>
+                                <span data-zh-TW="產品作品" data-zh-CN="产品作品" data-en="Product Work">產品作品</span>
+                            </div>
+                            <h3 class="portfolio-title">Smark</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="Web3鏈上數據分析工具" data-zh-CN="Web3链上数据分析工具" data-en="Web3 On-chain Analytics Tool">Web3鏈上數據分析工具</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description">
+                                Web3業務線的鏈上數據分析工具，發展路徑包含數據分析、自動化交易Bot和AI策略交易，幫助用戶發現Alpha投資機會。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Web3</span>
+                                <span class="portfolio-tag">區塊鏈</span>
+                                <span class="portfolio-tag">數據分析</span>
+                                <span class="portfolio-tag">產品設計</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://www.figma.com/file/htvDPCZZ9JJFXFi09i3WTv/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1?type=design&node-id=0%3A1&mode=design&t=WQlJ8C4KAFqoyz9n-1" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看設計稿</span>
+                                </a>
+                                <a href="https://app.mockplus.cn/app/zRoZm3Pp0Ghp/prototype/FMTf6a69A7" class="portfolio-link secondary" target="_blank">
+                                    <i class="fas fa-play"></i>
+                                    <span>互動原型</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Survey Cash -->
+                    <div class="portfolio-item design-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-poll"></i>
+                            </div>
+                            <div class="project-category-badge design-badge">
+                                <i class="fas fa-palette"></i>
+                                <span data-zh-TW="產品作品" data-zh-CN="产品作品" data-en="Product Work">產品作品</span>
+                            </div>
+                            <h3 class="portfolio-title">Survey Cash</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="海外問卷應用" data-zh-CN="海外问卷应用" data-en="Overseas Survey App">海外問卷應用</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description">
+                                發展海外業務的有償問卷應用，通過上游平台SDK獲取問卷數據，採用多App + ASO方式獲取用戶，零推廣費用獲得8千海外用戶。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">移動應用</span>
+                                <span class="portfolio-tag">海外市場</span>
+                                <span class="portfolio-tag">ASO優化</span>
+                                <span class="portfolio-tag">用戶增長</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://modao.cc/proto/3B3QWGLrqf3p2V27TNSrZ/sharing?view_mode=read_only" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看原型</span>
+                                </a>
+                                <a href="https://apps.apple.com/us/app/survey-spring-cash-earn-cash/id1664397717" class="portfolio-link secondary" target="_blank">
+                                    <i class="fab fa-apple"></i>
+                                    <span>App Store</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 愛教研內容生產系統 -->
+                    <div class="portfolio-item design-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="project-category-badge design-badge">
+                                <i class="fas fa-palette"></i>
+                                <span data-zh-TW="產品作品" data-zh-CN="产品作品" data-en="Product Work">產品作品</span>
+                            </div>
+                            <h3 class="portfolio-title" data-zh-TW="愛教研內容生產系統" data-zh-CN="爱教研内容生产系统" data-en="AiXueXi Content System">愛教研內容生產系統</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="教育SaaS內容創作平台" data-zh-CN="教育SaaS内容创作平台" data-en="EdTech SaaS Content Platform">教育SaaS內容創作平台</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description">
+                                為教育機構提供高效、容易製作個性化教學內容的SaaS服務，解決同質化競爭問題，提升內容製作效率30%。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">教育科技</span>
+                                <span class="portfolio-tag">SaaS平台</span>
+                                <span class="portfolio-tag">內容管理</span>
+                                <span class="portfolio-tag">效率提升</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://y2kh6d.axshare.com" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看原型</span>
+                                </a>
+                                <a href="https://www.aixuexi.com/" class="portfolio-link secondary" target="_blank">
+                                    <i class="fas fa-globe"></i>
+                                    <span>訪問平台</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 金吉列大學長 -->
+                    <div class="portfolio-item design-portfolio">
+                        <div class="portfolio-header">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="project-category-badge design-badge">
+                                <i class="fas fa-palette"></i>
+                                <span data-zh-TW="產品作品" data-zh-CN="产品作品" data-en="Product Work">產品作品</span>
+                            </div>
+                            <h3 class="portfolio-title" data-zh-TW="金吉列大學長" data-zh-CN="金吉列大学长" data-en="JJL University">金吉列大學長</h3>
+                            <p class="portfolio-subtitle" data-zh-TW="留學服務信息流App" data-zh-CN="留学服务信息流App" data-en="Study Abroad Service App">留學服務信息流App</p>
+                        </div>
+                        <div class="portfolio-content">
+                            <p class="portfolio-description">
+                                傳統留學巨頭的戰略轉型項目，融合留學、語培、移民、院校四大業務的全新信息流內容整合App，實現40.5萬新增用戶。
+                            </p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">移動應用</span>
+                                <span class="portfolio-tag">信息流</span>
+                                <span class="portfolio-tag">留學服務</span>
+                                <span class="portfolio-tag">0-1產品</span>
+                            </div>
+                            <div class="portfolio-links">
+                                <a href="https://cx2ojb.axshare.com" class="portfolio-link primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>查看原型</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Highlights Section -->
+                <div class="highlights-section">
+                    <div class="container">
+                        <h3 style="font-size: 1.8rem; font-weight: 700; color: #1e293b; margin-bottom: 16px; text-align: center;" data-zh-TW="作品集亮點" data-zh-CN="作品集亮点" data-en="Portfolio Highlights">作品集亮點</h3>
+                        <p style="text-align: center; color: #64748b; margin-bottom: 40px; font-size: 1.1rem;" data-zh-TW="展現核心能力與專業優勢" data-zh-CN="展现核心能力与专业优势" data-en="Showcasing Core Competencies & Professional Advantages">展現核心能力與專業優勢</p>
+                        
+                        <div class="highlights-grid">
+                            <!-- Innovation -->
+                            <div class="highlight-card" style="--highlight-color: linear-gradient(135deg, #3b82f6, #1d4ed8); --highlight-shadow: rgba(59, 130, 246, 0.3);">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <h4 class="highlight-title" data-zh-TW="創新思維" data-zh-CN="创新思维" data-en="Innovation">創新思維</h4>
+                                <p class="highlight-subtitle" data-zh-TW="結合AI技術與產品設計" data-zh-CN="结合AI技术与产品设计" data-en="Combining AI tech with product design">結合AI技術與產品設計</p>
+                                <p class="highlight-description" data-zh-TW="運用前沿AI技術解決實際產品問題，在多個項目中展現創新思維，從概念驗證到產品落地都能提供獨特的解決方案。" data-zh-CN="运用前沿AI技术解决实际产品问题，在多个项目中展现创新思维，从概念验证到产品落地都能提供独特的解决方案。" data-en="Utilizing cutting-edge AI technology to solve real product problems, demonstrating innovative thinking across multiple projects.">
+                                    運用前沿AI技術解決實際產品問題，在多個項目中展現創新思維，從概念驗證到產品落地都能提供獨特的解決方案。
+                                </p>
+                                <div class="highlight-tags">
+                                    <span class="highlight-tag">AI技術應用</span>
+                                    <span class="highlight-tag">創新解決方案</span>
+                                    <span class="highlight-tag">前沿技術</span>
+                                </div>
+                            </div>
+
+                            <!-- Data-Driven -->
+                            <div class="highlight-card" style="--highlight-color: linear-gradient(135deg, #10b981, #059669); --highlight-shadow: rgba(16, 185, 129, 0.3);">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h4 class="highlight-title" data-zh-TW="數據驅動" data-zh-CN="数据驱动" data-en="Data-Driven">數據驅動</h4>
+                                <p class="highlight-subtitle" data-zh-TW="基於用戶數據的決策制定" data-zh-CN="基于用户数据的决策制定" data-en="User data-based decision making">基於用戶數據的決策制定</p>
+                                <p class="highlight-description" data-zh-TW="深入分析用戶行為和市場數據，制定精準的產品策略。在Smark項目中實現65%月活躍率，Survey Cash獲得8千海外用戶零成本增長。" data-zh-CN="深入分析用户行为和市场数据，制定精准的产品策略。在Smark项目中实现65%月活跃率，Survey Cash获得8千海外用户零成本增长。" data-en="In-depth analysis of user behavior and market data to formulate precise product strategies. Achieved 65% MAU in Smark project.">
+                                    深入分析用戶行為和市場數據，制定精準的產品策略。在Smark項目中實現65%月活躍率，Survey Cash獲得8千海外用戶零成本增長。
+                                </p>
+                                <div class="highlight-tags">
+                                    <span class="highlight-tag">數據分析</span>
+                                    <span class="highlight-tag">用戶洞察</span>
+                                    <span class="highlight-tag">增長策略</span>
+                                </div>
+                            </div>
+
+                            <!-- User Experience -->
+                            <div class="highlight-card" style="--highlight-color: linear-gradient(135deg, #8b5cf6, #7c3aed); --highlight-shadow: rgba(139, 92, 246, 0.3);">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h4 class="highlight-title" data-zh-TW="用戶體驗" data-zh-CN="用户体验" data-en="User Experience">用戶體驗</h4>
+                                <p class="highlight-subtitle" data-zh-TW="以用戶為中心的設計理念" data-zh-CN="以用户为中心的设计理念" data-en="User-centered design approach">以用戶為中心的設計理念</p>
+                                <p class="highlight-description" data-zh-TW="深度理解用戶需求，通過用戶研究和設計思維創造優秀體驗。愛教研項目提升製作效率30%，金吉列大學長實現40.5萬新增用戶。" data-zh-CN="深度理解用户需求，通过用户研究和设计思维创造优秀体验。爱教研项目提升制作效率30%，金吉列大学长实现40.5万新增用户。" data-en="Deep understanding of user needs, creating excellent experiences through user research and design thinking.">
+                                    深度理解用戶需求，通過用戶研究和設計思維創造優秀體驗。愛教研項目提升製作效率30%，金吉列大學長實現40.5萬新增用戶。
+                                </p>
+                                <div class="highlight-tags">
+                                    <span class="highlight-tag">用戶研究</span>
+                                    <span class="highlight-tag">體驗設計</span>
+                                    <span class="highlight-tag">設計思維</span>
+                                </div>
+                            </div>
+
+                            <!-- Technical Implementation -->
+                            <div class="highlight-card" style="--highlight-color: linear-gradient(135deg, #f59e0b, #d97706); --highlight-shadow: rgba(245, 158, 11, 0.3);">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h4 class="highlight-title" data-zh-TW="技術實現" data-zh-CN="技术实现" data-en="Technical Implementation">技術實現</h4>
+                                <p class="highlight-subtitle" data-zh-TW="從概念到產品的完整實現" data-zh-CN="从概念到产品的完整实现" data-en="Complete implementation from concept to product">從概念到產品的完整實現</p>
+                                <p class="highlight-description" data-zh-TW="具備完整的產品開發能力，從前端到後端，從設計到實現。多個項目成功上線並獲得用戶認可，展現從0到1的產品構建實力。" data-zh-CN="具备完整的产品开发能力，从前端到后端，从设计到实现。多个项目成功上线并获得用户认可，展现从0到1的产品构建实力。" data-en="Complete product development capabilities from frontend to backend, from design to implementation.">
+                                    具備完整的產品開發能力，從前端到後端，從設計到實現。多個項目成功上線並獲得用戶認可，展現從0到1的產品構建實力。
+                                </p>
+                                <div class="highlight-tags">
+                                    <span class="highlight-tag">全棧開發</span>
+                                    <span class="highlight-tag">產品落地</span>
+                                    <span class="highlight-tag">項目管理</span>
+                                </div>
+                            </div>
+
+                            <!-- AI Technology -->
+                            <div class="highlight-card" style="--highlight-color: linear-gradient(135deg, #06b6d4, #0891b2); --highlight-shadow: rgba(6, 182, 212, 0.3);">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h4 class="highlight-title" data-zh-TW="AI科技" data-zh-CN="AI科技" data-en="AI Technology">AI科技</h4>
+                                <p class="highlight-subtitle" data-zh-TW="人工智慧技術深度應用" data-zh-CN="人工智能技术深度应用" data-en="Deep application of AI technology">人工智慧技術深度應用</p>
+                                <p class="highlight-description" data-zh-TW="深度掌握機器學習、自然語言處理和計算機視覺等AI核心技術，在多個項目中成功將AI技術轉化為實際商業價值，推動產品智能化升級。" data-zh-CN="深度掌握机器学习、自然语言处理和计算机视觉等AI核心技术，在多个项目中成功将AI技术转化为实际商业价值，推动产品智能化升级。" data-en="Deep mastery of AI core technologies including machine learning, NLP and computer vision, successfully converting AI technology into business value.">
+                                    深度掌握機器學習、自然語言處理和計算機視覺等AI核心技術，在多個項目中成功將AI技術轉化為實際商業價值，推動產品智能化升級。
+                                </p>
+                                <div class="highlight-tags">
+                                    <span class="highlight-tag">機器學習</span>
+                                    <span class="highlight-tag">自然語言處理</span>
+                                    <span class="highlight-tag">計算機視覺</span>
+                                </div>
+                            </div>
+
+                            <!-- Abstract Thinking -->
+                            <div class="highlight-card" style="--highlight-color: linear-gradient(135deg, #ec4899, #db2777); --highlight-shadow: rgba(236, 72, 153, 0.3);">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h4 class="highlight-title" data-zh-TW="抽象能力" data-zh-CN="抽象能力" data-en="Abstract Thinking">抽象能力</h4>
+                                <p class="highlight-subtitle" data-zh-TW="複雜問題的抽象化與系統性思考" data-zh-CN="复杂问题的抽象化与系统性思考" data-en="Abstraction and systematic thinking for complex problems">複雜問題的抽象化與系統性思考</p>
+                                <p class="highlight-description" data-zh-TW="具備優秀的抽象思維能力，能夠將複雜的業務邏輯轉化為清晰的產品架構和技術方案。擅長識別問題本質，設計可擴展的系統架構和可復用的解決方案。" data-zh-CN="具备优秀的抽象思维能力，能够将复杂的业务逻辑转化为清晰的产品架构和技术方案。擅长识别问题本质，设计可扩展的系统架构和可复用的解决方案。" data-en="Excellent abstract thinking ability, transforming complex business logic into clear product architecture and technical solutions.">
+                                    具備優秀的抽象思維能力，能夠將複雜的業務邏輯轉化為清晰的產品架構和技術方案。擅長識別問題本質，設計可擴展的系統架構和可復用的解決方案。
+                                </p>
+                                <div class="highlight-tags">
+                                    <span class="highlight-tag">系統架構</span>
+                                    <span class="highlight-tag">問題分析</span>
+                                    <span class="highlight-tag">邏輯抽象</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-zh-TW="© 2024 許智宣. 保留所有權利。" data-zh-CN="© 2024 许智宣. 保留所有权利。" data-en="© 2024 Xu Zhixuan. All rights reserved.">© 2024 許智宣. 保留所有權利。</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Multi-language support for portfolio page
+        function switchLanguage(lang) {
+            const elements = document.querySelectorAll('[data-zh-TW], [data-zh-CN], [data-en]');
+            elements.forEach(element => {
+                const text = element.getAttribute('data-' + lang);
+                if (text) {
+                    if (element.tagName === 'INPUT' && element.type === 'text') {
+                        element.placeholder = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+            
+            // Update tooltip for floating button if exists
+            const floatingBtn = document.querySelector('.floating-portfolio-btn');
+            if (floatingBtn) {
+                const tooltipText = floatingBtn.getAttribute('data-' + lang);
+                if (tooltipText) {
+                    floatingBtn.setAttribute('data-tooltip', tooltipText);
+                }
+            }
+        }
+
+        // Initialize language switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const langBtns = document.querySelectorAll('.lang-btn');
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // Update active button
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Switch language
+                    switchLanguage(lang);
+                    
+                    // Save language preference
+                    localStorage.setItem('preferredLanguage', lang);
+                });
+            });
+            
+            // Load saved language preference
+            const savedLang = localStorage.getItem('preferredLanguage') || 'zh-TW';
+            const activeBtn = document.querySelector(`[data-lang="${savedLang}"]`);
+            if (activeBtn) {
+                langBtns.forEach(b => b.classList.remove('active'));
+                activeBtn.classList.add('active');
+                switchLanguage(savedLang);
+            }
+        });
+    </script>
+</body>
+</html>
