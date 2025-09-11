@@ -1,11 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>許智宣 - 資深產品經理 | Senior Product Manager</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -48,12 +47,12 @@
         .floating-portfolio-btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
             background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
-            border-radius: 30px;
+            border-radius: 50%;
             z-index: -1;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -101,51 +100,34 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .floating-portfolio-btn {
-                width: 120px !important;
-                height: 50px !important;
-                font-size: 14px !important;
-                bottom: 20px !important;
-                right: 20px !important;
-                gap: 6px !important;
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
             }
             
-            .floating-portfolio-btn i {
-                font-size: 16px !important;
+            .floating-portfolio-btn::after {
+                font-size: 12px;
+                padding: 6px 8px;
             }
         }
         
         /* Animation keyframes */
-        @keyframes gradientShift {
+        @keyframes pulse {
             0% {
-                background-position: 0% 50%;
+                box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
             }
             50% {
-                background-position: 100% 50%;
+                box-shadow: 0 8px 32px rgba(59, 130, 246, 0.6);
             }
             100% {
-                background-position: 0% 50%;
+                box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
             }
         }
         
-        @keyframes floatBounce {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-        
-        @keyframes glow {
-            0% {
-                box-shadow: 0 12px 40px rgba(255, 107, 107, 0.6);
-            }
-            50% {
-                box-shadow: 0 15px 50px rgba(255, 107, 107, 0.9);
-            }
-            100% {
-                box-shadow: 0 12px 40px rgba(255, 107, 107, 0.6);
-            }
+        .floating-portfolio-btn {
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
@@ -168,7 +150,9 @@
         <div class="container">
             <div class="profile-section">
                 <div class="profile-image">
-                    <img src="image/头像.PNG" alt="許智宣" class="avatar">
+                    <div class="avatar-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
                 </div>
                 <div class="profile-info">
                     <h1 class="name" data-zh-TW="許智宣" data-zh-CN="许智宣" data-en="Xu Zhixuan">許智宣</h1>
@@ -183,14 +167,13 @@
     <nav class="nav">
         <div class="container">
             <ul class="nav-list">
-                <li><a href="#contact" class="nav-link" data-zh-TW="聯絡方式" data-zh-CN="联系方式" data-en="Contact">聯絡方式</a></li>
                 <li><a href="#about" class="nav-link" data-zh-TW="關於我" data-zh-CN="关于我" data-en="About">關於我</a></li>
                 <li><a href="#experience" class="nav-link" data-zh-TW="工作經驗" data-zh-CN="工作经验" data-en="Experience">工作經驗</a></li>
                 <li><a href="#skills" class="nav-link" data-zh-TW="技能專長" data-zh-CN="技能专长" data-en="Skills">技能專長</a></li>
                 <li><a href="#projects" class="nav-link" data-zh-TW="專案作品" data-zh-CN="项目作品" data-en="Projects">專案作品</a></li>
+                <li><a href="portfolio.html" class="nav-link" data-zh-TW="作品集" data-zh-CN="作品集" data-en="Portfolio">作品集</a></li>
                 <li><a href="#education" class="nav-link" data-zh-TW="教育背景" data-zh-CN="教育背景" data-en="Education">教育背景</a></li>
-                <li><a href="#industry-influence" class="nav-link" data-zh-TW="行業影響力" data-zh-CN="行业影响力" data-en="Industry Influence">行業影響力</a></li>
-                <li><a href="#learning-certificates" class="nav-link" data-zh-TW="學習證書" data-zh-CN="学习证书" data-en="Learning Certificates">學習證書</a></li>
+                <li><a href="#contact" class="nav-link" data-zh-TW="聯絡方式" data-zh-CN="联系方式" data-en="Contact">聯絡方式</a></li>
             </ul>
         </div>
     </nav>
@@ -220,7 +203,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div class="contact-info">
                             <h3 data-zh-TW="地點" data-zh-CN="地点" data-en="Location">地點</h3>
-                            <p data-zh-TW="北京/上海/台北" data-zh-CN="北京/上海/台北" data-en="Beijing/Shanghai/Taipei">北京/上海/台北</p>
+                            <p data-zh-TW="上海/台北" data-zh-CN="上海/台北" data-en="Shanghai/Taipei">上海/台北</p>
                         </div>
                     </div>
                 </div>
@@ -272,7 +255,7 @@
                                 <span class="period">2023.11 - 2025.09</span>
                             </div>
                             <ul class="achievements">
-                                <li data-zh-TW="負責Apollo HR SaaS產品線戰略規劃與核心功能重構" data-zh-CN="负责Apollo HR SaaS产品线战略规划与核心功能重构" data-en="Responsible for Apollo HR SaaS product line strategic planning and core functionality reconstruction">負責Apollo HR SaaS產品線戰略規劃與核心功能重構</li>
+                                <li data-zh-TW="負貫Apollo HR SaaS產品線戰略規劃與核心功能重構" data-zh-CN="负责Apollo HR SaaS产品线战略规划与核心功能重构" data-en="Responsible for Apollo HR SaaS product line strategic planning and core functionality reconstruction">負貫Apollo HR SaaS產品線戰略規劃與核心功能重構</li>
                                 <li data-zh-TW="制定年度產品戰略：通過競品分析和客戶訪談，識別排班管理為核心痛點，成功推動３個大客戶續約" data-zh-CN="制定年度产品战略：通过竞品分析和客户访谈，识别排班管理为核心痛点，成功推动３个大客户续约" data-en="Developed annual product strategy: identified scheduling management as core pain point through competitive analysis and customer interviews, successfully driving 3 major customer renewals">制定年度產品戰略：通過競品分析和客戶訪談，識別排班管理為核心痛點，成功推動３個大客戶續約</li>
                                 <li data-zh-TW="重構核心功能架構：獨立設計Apollo/XE排班系統架構，２個月內完成多段排班、自動排班等核心功能的0-1重構" data-zh-CN="重构核心功能架构：独立设计Apollo/XE排班系统架构，２个月内完成多段排班、自动排班等核心功能的0-1重构" data-en="Core functionality restructuring: independently designed Apollo/XE scheduling system architecture, completing 0-1 reconstruction of multi-segment scheduling and automated scheduling within 2 months">重構核心功能架構：獨立設計Apollo/XE排班系統架構，２個月內完成多段排班、自動排班等核心功能的0-1重構</li>
                             </ul>
@@ -289,7 +272,7 @@
                             </div>
                             <ul class="achievements">
                                 <li data-zh-TW="主導Web3業務線拓展與國際化產品設計" data-zh-CN="主导Web3业务线拓展与国际化产品设计" data-en="Led Web3 business line expansion and international product design">主導Web3業務線拓展與國際化產品設計</li>
-                                <li data-zh-TW="Smark鏈上分析工具：以1萬美元推廣預算撬動近萬用戶，月活躍率達65%，實現30萬美元收入" data-zh-CN="Smark链上分析工具：以1万美元推广预算撬动近万用户，月活跃率达65%，实现30万美元收入" data-en="Smark on-chain analytics tool: leveraged $10k marketing budget to acquire nearly 10k users with 65% MAU, generating $300k revenue">Smark鏈上分析工具：以1萬美元推廣預算撬動近萬用戶，月活躍率達65%，實現30萬美元收入</li>
+                                <li data-zh-TW="Smark鏈上分析工具：以1萬美元推廣預算撬動近萬用戶，月活躍率道65%，實現30萬美元收入" data-zh-CN="Smark链上分析工具：以1万美元推广预算撬动近万用户，月活跃率达65%，实现30万美元收入" data-en="Smark on-chain analytics tool: leveraged $10k marketing budget to acquire nearly 10k users with 65% MAU, generating $300k revenue">Ｓmark鏈上分析工具：以1萬美元推廣預算撬動近萬用戶，月活躍率道65%，實現30萬美元收入</li>
                                 <li data-zh-TW="SurveyCash全球項目：零推廣費用下，通過ASO優化獲得8千海外用戶，分成收入達數萬美元" data-zh-CN="SurveyCash全球项目：零推广费用下，通过ASO优化获得8千海外用户，分成收入达数万美元" data-en="SurveyCash global project: acquired 8k overseas users through ASO optimization with zero marketing spend, generating tens of thousands in revenue sharing">ＳurveyCash全球項目：零推廣費用下，通過ASO優化獲得8千海外用戶，分成收入達數萬美元</li>
                             </ul>
                         </div>
@@ -306,7 +289,7 @@
                             <ul class="achievements">
                                 <li data-zh-TW="引領教育SaaS業務轉型，構建知識圖譜內容中台" data-zh-CN="引领教育SaaS业务转型，构建知识图谱内容中台" data-en="Led EdTech SaaS business transformation and built knowledge graph content platform">引領教育SaaS業務轉型，構建知識圖譜內容中台</li>
                                 <li data-zh-TW="重構內容SaaS系統底層架構，實現所見即所得編輯體驗，將機構內容制作效率提升３０%" data-zh-CN="重构内容SaaS系统底层架构，实现所见即所得编辑体验，将机构内容制作效率提升３０%" data-en="Restructured content SaaS system architecture, implemented WYSIWYG editing experience, improving institutional content creation efficiency by 30%">重構內容SaaS系統底層架構，實現所見即所得編輯體驗，將機構內容制作效率提升３０%</li>
-                                <li data-zh-TW="知識圖譜中台：從0設計並實現跨學科知識結構化，支撐2400萬收入的自適應學習業務" data-zh-CN="知识图谱中台：从0设计并实现跨学科知识结构化，支撑2400万收入的自适应学习业务" data-en="Knowledge graph platform: designed and implemented cross-disciplinary knowledge structuring from scratch, supporting $24M adaptive learning business revenue">知識圖譜中台：從0設計並實現跨學科知識結構化，支撐2400萬收入的自適應學習業務</li>
+                                <li data-zh-TW="知識圖譜中台：從0設計並實現跨學科知識結構化，支搐2400萬收入的自適應學習業務" data-zh-CN="知识图谱中台：从0设计并实现跨学科知识结构化，支搐2400万收入的自适应学习业务" data-en="Knowledge graph platform: designed and implemented cross-disciplinary knowledge structuring from scratch, supporting $24M adaptive learning business revenue">知識圖譜中台：從0設計並實現跨學科知識結構化，支搐2400萬收入的自適應學習業務</li>
                             </ul>
                         </div>
                     </div>
@@ -324,6 +307,9 @@
                                 <li data-zh-TW="市場定位策略：通過用戶調研識別「專業諮詢+內容獲客」的雙輪驅動模式" data-zh-CN="市场定位策略：通过用户调研识别「专业咨询+内容获客」的双轮驱动模式" data-en="Market positioning strategy: identified dual-drive model of professional consulting + content acquisition through user research">市場定位策略：通過用戶調研識別「專業諮詢+內容獲客」的雙輪驅動模式</li>
                                 <li data-zh-TW="增長策略實現：優化推薦算法和轉化漏斗，實現新增用戶40.5萬，諮詢轉化率提升3.5%，注冊轉化率提升10%" data-zh-CN="增长策略实现：优化推荐算法和转化漏斗，实现新增用户40.5万，咨询转化率提升3.5%，注册转化率提升10%" data-en="Growth strategy implementation: optimized recommendation algorithms and conversion funnels, achieving 405k new users, 3.5% consultation conversion increase, 10% registration conversion increase">增長策略實現：優化推薦算法和轉化漏斗，實現新增用戶40.5萬，諮詢轉化率提升3.5%，注冊轉化率提升10%</li>
                             </ul>
+                            <p class="early-experience" style="margin-top: 20px; color: #64748b; font-style: italic; font-size: 0.9rem;">
+                                <span data-zh-TW="（早期經歷：Fun Union｜用戶增長 PM、元子育兒｜知識付費 PM，略）" data-zh-CN="（早期经历：Fun Union｜用户增长 PM、元子育儿｜知识付费 PM，略）" data-en="(Early Career: Fun Union | User Growth PM, Yuanzi Parenting | Knowledge Payment PM, omitted)">（早期經歷：Fun Union｜用戶增長 PM、元子育兒｜知識付費 PM，略）</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -338,45 +324,45 @@
                     <div class="skill-category">
                         <h3 data-zh-TW="產品管理" data-zh-CN="产品管理" data-en="Product Management">產品管理</h3>
                         <div class="skill-items">
-                            <span class="skill-item" data-zh-TW="產品roadmap設計" data-zh-CN="产品roadmap设计" data-en="Product Roadmap Design">產品roadmap設計</span>
-                            <span class="skill-item" data-zh-TW="市場定位分析" data-zh-CN="市场定位分析" data-en="Market Positioning Analysis">市場定位分析</span>
-                            <span class="skill-item" data-zh-TW="競品策略制定" data-zh-CN="竞品策略制定" data-en="Competitive Strategy">競品策略制定</span>
-                            <span class="skill-item" data-zh-TW="用戶研究" data-zh-CN="用户研究" data-en="User Research">用戶研究</span>
-                            <span class="skill-item" data-zh-TW="敏捷開發" data-zh-CN="敏捷开发" data-en="Agile Development">敏捷開發</span>
-                            <span class="skill-item" data-zh-TW="0-1產品構建" data-zh-CN="0-1产品构建" data-en="0-1 Product Building">0-1產品構建</span>
+                            <span class="skill-item">產品roadmap設計</span>
+                            <span class="skill-item">市場定位分析</span>
+                            <span class="skill-item">競品策略制定</span>
+                            <span class="skill-item">用戶研究</span>
+                            <span class="skill-item">敏捷開發</span>
+                            <span class="skill-item">0-1產品構建</span>
                         </div>
                     </div>
                     <div class="skill-category">
                         <h3 data-zh-TW="數據分析" data-zh-CN="数据分析" data-en="Data Analysis">數據分析</h3>
                         <div class="skill-items">
-                            <span class="skill-item" data-zh-TW="GA4/BigQuery架構" data-zh-CN="GA4/BigQuery架构" data-en="GA4/BigQuery Architecture">GA4/BigQuery架構</span>
-                            <span class="skill-item" data-zh-TW="增長模型構建" data-zh-CN="增长模型构建" data-en="Growth Model Building">增長模型構建</span>
-                            <span class="skill-item" data-zh-TW="A/B測試體系" data-zh-CN="A/B测试体系" data-en="A/B Testing System">A/B測試體系</span>
-                            <span class="skill-item" data-zh-TW="SQL/Python" data-zh-CN="SQL/Python" data-en="SQL/Python">SQL/Python</span>
-                            <span class="skill-item" data-zh-TW="Looker Studio" data-zh-CN="Looker Studio" data-en="Looker Studio">Looker Studio</span>
-                            <span class="skill-item" data-zh-TW="數據洞察分析" data-zh-CN="数据洞察分析" data-en="Data Insight Analysis">數據洞察分析</span>
+                            <span class="skill-item">GA4/BigQuery架構</span>
+                            <span class="skill-item">增長模型構建</span>
+                            <span class="skill-item">A/B測試體系</span>
+                            <span class="skill-item">SQL/Python</span>
+                            <span class="skill-item">Looker Studio</span>
+                            <span class="skill-item">數據洞察分析</span>
                         </div>
                     </div>
                     <div class="skill-category">
                         <h3 data-zh-TW="AI應用" data-zh-CN="AI应用" data-en="AI Applications">AI應用</h3>
                         <div class="skill-items">
-                            <span class="skill-item" data-zh-TW="產品智能化改造" data-zh-CN="产品智能化改造" data-en="Product Intelligence Transformation">產品智能化改造</span>
-                            <span class="skill-item" data-zh-TW="自動化流程設計" data-zh-CN="自动化流程设计" data-en="Automation Workflow Design">自動化流程設計</span>
-                            <span class="skill-item" data-zh-TW="AI工具集成" data-zh-CN="AI工具集成" data-en="AI Tools Integration">AI工具集成</span>
-                            <span class="skill-item" data-zh-TW="GPT API集成" data-zh-CN="GPT API集成" data-en="GPT API Integration">GPT API集成</span>
-                            <span class="skill-item" data-zh-TW="Prompt Engineering" data-zh-CN="Prompt Engineering" data-en="Prompt Engineering">Prompt Engineering</span>
-                            <span class="skill-item" data-zh-TW="AI IDE開發" data-zh-CN="AI IDE开发" data-en="AI IDE Development">AI IDE開發</span>
+                            <span class="skill-item">產品智能化改造</span>
+                            <span class="skill-item">自動化流程設計</span>
+                            <span class="skill-item">AI工具集成</span>
+                            <span class="skill-item">GPT API集成</span>
+                            <span class="skill-item">Prompt Engineering</span>
+                            <span class="skill-item">AI IDE開發</span>
                         </div>
                     </div>
                     <div class="skill-category">
                         <h3 data-zh-TW="團隊領導" data-zh-CN="团队领导" data-en="Team Leadership">團隊領導</h3>
                         <div class="skill-items">
-                            <span class="skill-item" data-zh-TW="跨部門協作" data-zh-CN="跨部门协作" data-en="Cross-functional Collaboration">跨部門協作</span>
-                            <span class="skill-item" data-zh-TW="人才培養" data-zh-CN="人才培养" data-en="Talent Development">人才培養</span>
-                            <span class="skill-item" data-zh-TW="流程標準化建立" data-zh-CN="流程标准化建立" data-en="Process Standardization">流程標準化建立</span>
-                            <span class="skill-item" data-zh-TW="OKR管理" data-zh-CN="OKR管理" data-en="OKR Management">OKR管理</span>
-                            <span class="skill-item" data-zh-TW="敏捷開發" data-zh-CN="敏捷开发" data-en="Agile Development">敏捷開發</span>
-                            <span class="skill-item" data-zh-TW="商業分析" data-zh-CN="商业分析" data-en="Business Analysis">商業分析</span>
+                            <span class="skill-item">跨部門協作</span>
+                            <span class="skill-item">人才培養</span>
+                            <span class="skill-item">流程標準化建立</span>
+                            <span class="skill-item">OKR管理</span>
+                            <span class="skill-item">敖捷開發</span>
+                            <span class="skill-item">商業分析</span>
                         </div>
                     </div>
                 </div>
@@ -390,64 +376,45 @@
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="fas fa-calendar-alt"></i>
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
                         <div class="project-content">
-                            <h3 data-zh-TW="Apollo HR排班系統重構" data-zh-CN="Apollo HR排班系统重构" data-en="Apollo HR Scheduling System Reconstruction">Apollo HR排班系統重構</h3>
-                            <p data-zh-TW="獨立設計Apollo/XE排班系統架構，2個月內完成多段排班、自動排班等核心功能的0-1重構，解決困擾客戶6個月的排班復雜度問題，成功推動3個大客戶續約。" data-zh-CN="独立设计Apollo/XE排班系统架构，2个月内完成多段排班、自动排班等核心功能的0-1重构，解决困扰客户6个月的排班复杂度问题，成功推动3个大客户续约。" data-en="Independently designed Apollo/XE scheduling system architecture, completed 0-1 reconstruction of core functions including multi-segment and automated scheduling within 2 months, solving 6-month scheduling complexity issues and driving 3 major customer renewals.">獨立設計Apollo/XE排班系統架構，2個月內完成多段排班、自動排班等核心功能的0-1重構，解決困擾客戶6個月的排班復雜度問題，成功推動3個大客戶續約。</p>
+                            <h3 data-zh-TW="移動應用重設計" data-zh-CN="移动应用重设计" data-en="Mobile App Redesign">移動應用重設計</h3>
+                            <p data-zh-TW="重新設計用戶界面，提升用戶體驗和轉換率" data-zh-CN="重新设计用户界面，提升用户体验和转换率" data-en="Redesigned user interface to improve user experience and conversion rates">重新設計用戶界面，提升用戶體驗和轉換率</p>
                             <div class="project-tags">
-                                <span class="tag" data-zh-TW="SaaS產品" data-zh-CN="SaaS产品" data-en="SaaS Product">SaaS產品</span>
-                                <span class="tag" data-zh-TW="系統架構" data-zh-CN="系统架构" data-en="System Architecture">系統架構</span>
-                                <span class="tag" data-zh-TW="0-1重構" data-zh-CN="0-1重构" data-en="0-1 Reconstruction">0-1重構</span>
-                                <span class="tag" data-zh-TW="客戶成功" data-zh-CN="客户成功" data-en="Customer Success">客戶成功</span>
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">用戶研究</span>
+                                <span class="tag">A/B測試</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="fab fa-bitcoin"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="project-content">
-                            <h3 data-zh-TW="Web3 Smark產品策略" data-zh-CN="Web3 Smark产品策略" data-en="Web3 Smark Product Strategy">Web3 Smark產品策略</h3>
-                            <p data-zh-TW="在熊市環境下，通過分析鏈上數據需求痛點，選擇「工具+交易」的差異化定位。以1萬美元推廣預算撬動近萬用戶，月活躍率達65%，實現30萬美元收入，6個月達成盈虧平衡。" data-zh-CN="在熊市环境下，通过分析链上数据需求痛点，选择「工具+交易」的差异化定位。以1万美元推广预算撬动近万用户，月活跃率达65%，实现30万美元收入，6个月达成盈亏平衡。" data-en="In bear market conditions, identified on-chain data pain points and chose tools+trading differentiated positioning. Leveraged $10k marketing budget to acquire 10k users with 65% MAU, generating $300k revenue and achieving profitability within 6 months.">在熊市環境下，通過分析鏈上數據需求痛點，選擇「工具+交易」的差異化定位。以1萬美元推廣預算撬動近萬用戶，月活躍率達65%，實現30萬美元收入，6個月達成盈虧平衡。</p>
+                            <h3 data-zh-TW="數據分析平台" data-zh-CN="数据分析平台" data-en="Data Analytics Platform">數據分析平台</h3>
+                            <p data-zh-TW="開發企業級數據分析工具，支援決策制定" data-zh-CN="开发企业级数据分析工具，支持决策制定" data-en="Developed enterprise-level data analytics tools to support decision making">開發企業級數據分析工具，支援決策制定</p>
                             <div class="project-tags">
-                                <span class="tag" data-zh-TW="Web3" data-zh-CN="Web3" data-en="Web3">Web3</span>
-                                <span class="tag" data-zh-TW="產品策略" data-zh-CN="产品策略" data-en="Product Strategy">產品策略</span>
-                                <span class="tag" data-zh-TW="數據分析" data-zh-CN="数据分析" data-en="Data Analysis">數據分析</span>
-                                <span class="tag" data-zh-TW="增長策略" data-zh-CN="增长策略" data-en="Growth Strategy">增長策略</span>
+                                <span class="tag">數據分析</span>
+                                <span class="tag">產品策略</span>
+                                <span class="tag">企業級</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="fas fa-brain"></i>
+                            <i class="fas fa-users"></i>
                         </div>
                         <div class="project-content">
-                            <h3 data-zh-TW="愛學習知識圖譜中台" data-zh-CN="爱学习知识图谱中台" data-en="AiXueXi Knowledge Graph Platform">愛學習知識圖譜中台</h3>
-                            <p data-zh-TW="面對雙減政策沖擊，主導設計從標準化內容向個性化定制的業務轉型策略。從0設計並實現跨學科知識結構化，支撐2400萬收入的自適應學習業務，將機構內容制作效率提升30%。" data-zh-CN="面对双减政策冲击，主导设计从标准化内容向个性化定制的业务转型策略。从0设计并实现跨学科知识结构化，支撑2400万收入的自适应学习业务，将机构内容制作效率提升30%。" data-en="Facing the dual-reduction policy impact, led business transformation strategy from standardized content to personalized customization. Designed and implemented cross-disciplinary knowledge structuring from scratch, supporting $24M adaptive learning business revenue and improving content creation efficiency by 30%.">面對雙減政策沖擊，主導設計從標準化內容向個性化定制的業務轉型策略。從0設計並實現跨學科知識結構化，支撐2400萬收入的自適應學習業務，將機構內容制作效率提升30%。</p>
+                            <h3 data-zh-TW="客戶管理系統" data-zh-CN="客户管理系统" data-en="Customer Management System">客戶管理系統</h3>
+                            <p data-zh-TW="設計並實施客戶關係管理解決方案" data-zh-CN="设计并实施客户关系管理解决方案" data-en="Designed and implemented customer relationship management solutions">設計並實施客戶關係管理解決方案</p>
                             <div class="project-tags">
-                                <span class="tag" data-zh-TW="EdTech" data-zh-CN="EdTech" data-en="EdTech">EdTech</span>
-                                <span class="tag" data-zh-TW="知識圖譜" data-zh-CN="知识图谱" data-en="Knowledge Graph">知識圖譜</span>
-                                <span class="tag" data-zh-TW="業務轉型" data-zh-CN="业务转型" data-en="Business Transformation">業務轉型</span>
-                                <span class="tag" data-zh-TW="SaaS系統" data-zh-CN="SaaS系统" data-en="SaaS System">SaaS系統</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-image">
-                            <i class="fas fa-plane"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3 data-zh-TW="金吉列大學長平台" data-zh-CN="金吉列大学长平台" data-en="JJL University Platform">金吉列大學長平台</h3>
-                            <p data-zh-TW="0-1構建大學長平台，通過用戶調研識別「專業咨詢+內容獲客」的雙輪驅動模式。優化推薦算法和轉化漏斗，實現新增用戶40.5萬，咨詢轉化率提升3.5%，注冊轉化率提升10%。" data-zh-CN="0-1构建大学长平台，通过用户调研识别「专业咨询+内容获客」的双轮驱动模式。优化推荐算法和转化漏斗，实现新增用户40.5万，咨询转化率提升3.5%，注册转化率提升10%。" data-en="Built university platform from 0-1, identified dual-drive model of professional consulting + content acquisition through user research. Optimized recommendation algorithms and conversion funnels, achieving 405k new users, 3.5% consultation conversion increase, and 10% registration conversion increase.">0-1構建大學長平台，通過用戶調研識別「專業咨詢+內容獲客」的雙輪驅動模式。優化推薦算法和轉化漏斗，實現新增用戶40.5萬，咨詢轉化率提升3.5%，注冊轉化率提升10%。</p>
-                            <div class="project-tags">
-                                <span class="tag" data-zh-TW="0-1產品" data-zh-CN="0-1产品" data-en="0-1 Product">0-1產品</span>
-                                <span class="tag" data-zh-TW="用戶研究" data-zh-CN="用户研究" data-en="User Research">用戶研究</span>
-                                <span class="tag" data-zh-TW="增長優化" data-zh-CN="增长优化" data-en="Growth Optimization">增長優化</span>
-                                <span class="tag" data-zh-TW="留學服務" data-zh-CN="留学服务" data-en="Study Abroad Service">留學服務</span>
+                                <span class="tag">CRM</span>
+                                <span class="tag">流程優化</span>
+                                <span class="tag">系統整合</span>
                             </div>
                         </div>
                     </div>
@@ -477,146 +444,16 @@
                             </div>
                         </div>
                     </div>
-                    <div id="industry-influence" class="industry-influence">
+                    <div class="industry-influence">
                         <h4 data-zh-TW="行業影響力" data-zh-CN="行业影响力" data-en="Industry Influence">行業影響力</h4>
                         <div class="influence-items">
-                            <a href="https://www.woshipm.com/u/723249" target="_blank" class="influence-item-with-image influence-link">
-                                <div class="influence-image">
-                                    <img src="image/2022年年度作家.JPEG" alt="2022年度作家" class="influence-award-image">
-                                </div>
-                                <div class="influence-details">
-                                    <h5 data-zh-TW="《人人都是產品經理》2022年度作者" data-zh-CN="《人人都是产品经理》2022年度作者" data-en="Product Manager Community 2022 Annual Author">《人人都是產品經理》2022年度作者</h5>
-                                    <p data-zh-TW="榮獲產品經理社群年度作者殊榮，全网累計粉絲破萬" data-zh-CN="荣获产品经理社群年度作者殊荣，全网累计粉丝破万" data-en="Awarded Annual Author by Product Manager Community, total followers across platforms exceed 10k">榮獲產品經理社群年度作者殊榮，全网累計粉絲破萬</p>
-                                </div>
-                                <div class="link-indicator">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </div>
-                            </a>
-                            <div class="influence-item-with-image">
-                                <div class="influence-image">
-                                    <img src="image/人人都是產品經理.webp" alt="人人都是產品經理" class="influence-platform-image">
-                                </div>
-                                <div class="influence-details">
-                                    <h5 data-zh-TW="2025羅技智簡大賽亞軍" data-zh-CN="2025罗技智简大赛亚军" data-en="2025 Logitech Smart Brief Competition Runner-up">2025羅技智簡大賽亞軍</h5>
-                                    <p data-zh-TW="在智能辦公解決方案競賽中獲得優異表現，展現產品創新實力" data-zh-CN="在智能办公解决方案竞赛中获得优异表现，展现产品创新实力" data-en="Outstanding performance in smart office solutions competition, demonstrating product innovation capabilities">在智能辦公解決方案競賽中獲得優異表現，展現產品創新實力</p>
-                                </div>
+                            <div class="influence-item">
+                                <i class="fas fa-pen"></i>
+                                <span data-zh-TW="《人人都是產品經理》2022年度作者" data-zh-CN="《人人都是产品经理》2022年度作者" data-en="Product Manager Community 2022 Annual Author">《人人都是產品經理》2022年度作者</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Learning Certificates Section -->
-        <section id="learning-certificates" class="section">
-            <div class="container">
-                <h2 class="section-title" data-zh-TW="個人學習證書" data-zh-CN="个人学习证书" data-en="Personal Learning Certificates">個人學習證書</h2>
-                <p class="section-subtitle" data-zh-TW="工作後持續學習的證明" data-zh-CN="工作后持续学习的证明" data-en="Evidence of continuous learning after work">工作後持續學習的證明</p>
-                
-                <div class="certificates-grid">
-                    <!-- WTF Academy Solidity Basic -->
-                    <div class="certificate-card">
-                        <div class="certificate-image">
-                            <img src="image/Solidity入门课程.png" alt="Solidity入門課程" class="cert-image">
-                            <div class="certificate-overlay">
-                                <div class="cert-platform" data-zh-TW="WTF學院" data-zh-CN="WTF学院" data-en="WTF Academy">WTF學院</div>
-                                <div class="cert-hash">
-                                    <small data-zh-TW="證書Hash (Geroli)" data-zh-CN="证书Hash (Geroli)" data-en="Certificate Hash (Geroli)">證書Hash (Geroli)</small>
-                                    <div class="hash-text">0x4b2248fbf354f31486723d75c8f684ed21408deb76b1588338dd671096b1a649</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="certificate-content">
-                            <h3 data-zh-TW="Solidity入門課程" data-zh-CN="Solidity入门课程" data-en="Solidity Basic Course">Solidity入門課程</h3>
-                            <div class="cert-tags">
-                                <span class="cert-tag" data-zh-TW="區塊鏈" data-zh-CN="区块链" data-en="Blockchain">區塊鏈</span>
-                                <span class="cert-tag" data-zh-TW="智能合約" data-zh-CN="智能合约" data-en="Smart Contracts">智能合約</span>
-                                <span class="cert-tag" data-zh-TW="Web3" data-zh-CN="Web3" data-en="Web3">Web3</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- WTF Academy Solidity Advanced -->
-                    <div class="certificate-card">
-                        <div class="certificate-image">
-                            <img src="image/solidity进阶课程.png" alt="Solidity進階課程" class="cert-image">
-                            <div class="certificate-overlay">
-                                <div class="cert-platform" data-zh-TW="WTF學院" data-zh-CN="WTF学院" data-en="WTF Academy">WTF學院</div>
-                                <div class="cert-hash">
-                                    <small data-zh-TW="證書Hash (Geroli)" data-zh-CN="证书Hash (Geroli)" data-en="Certificate Hash (Geroli)">證書Hash (Geroli)</small>
-                                    <div class="hash-text">0x42ce105f5fb2befc3c4fc7afd859f78d0ccfa60279beaf36b95a617b55f19201</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="certificate-content">
-                            <h3 data-zh-TW="Solidity進階課程" data-zh-CN="Solidity进阶课程" data-en="Solidity Advanced Course">Solidity進階課程</h3>
-                            <div class="cert-tags">
-                                <span class="cert-tag" data-zh-TW="進階開發" data-zh-CN="进阶开发" data-en="Advanced Development">進階開發</span>
-                                <span class="cert-tag" data-zh-TW="DeFi" data-zh-CN="DeFi" data-en="DeFi">DeFi</span>
-                                <span class="cert-tag" data-zh-TW="智能合約安全" data-zh-CN="智能合约安全" data-en="Smart Contract Security">智能合約安全</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Coursera Programming Course -->
-                    <div class="certificate-card">
-                        <div class="certificate-image">
-                            <img src="image/Coursera 程序设计课.png" alt="程序設計課" class="cert-image">
-                            <div class="certificate-overlay">
-                                <div class="cert-platform" data-zh-TW="Coursera" data-zh-CN="Coursera" data-en="Coursera">Coursera</div>
-                                <div class="cert-status">
-                                    <span class="status-badge verified" data-zh-TW="優秀成績畢業" data-zh-CN="优秀成绩毕业" data-en="Graduated with Honors">優秀成績畢業</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="certificate-content">
-                            <h3 data-zh-TW="程序設計課程" data-zh-CN="程序设计课程" data-en="Programming Course">程序設計課程</h3>
-                            <div class="cert-tags">
-                                <span class="cert-tag" data-zh-TW="程式設計" data-zh-CN="程序设计" data-en="Programming">程式設計</span>
-                                <span class="cert-tag" data-zh-TW="算法" data-zh-CN="算法" data-en="Algorithms">算法</span>
-                                <span class="cert-tag" data-zh-TW="數據結構" data-zh-CN="数据结构" data-en="Data Structures">數據結構</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Google Marketing Course -->
-                    <div class="certificate-card">
-                        <div class="certificate-image">
-                            <img src="image/谷歌 出海营销.jpeg" alt="谷歌出海營銷" class="cert-image">
-                            <div class="certificate-overlay">
-                                <div class="cert-platform" data-zh-TW="谷歌" data-zh-CN="谷歌" data-en="Google">谷歌</div>
-                                <div class="cert-status">
-                                    <span class="status-badge excellent" data-zh-TW="優秀成績畢業" data-zh-CN="优秀成绩毕业" data-en="Graduated with Honors">優秀成績畢業</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="certificate-content">
-                            <h3 data-zh-TW="出海營銷課程" data-zh-CN="出海营销课程" data-en="Global Marketing Course">出海營銷課程</h3>
-                            <div class="cert-tags">
-                                <span class="cert-tag" data-zh-TW="數位營銷" data-zh-CN="数字营销" data-en="Digital Marketing">數位營銷</span>
-                                <span class="cert-tag" data-zh-TW="國際市場" data-zh-CN="国际市场" data-en="International Market">國際市場</span>
-                                <span class="cert-tag" data-zh-TW="Google Ads" data-zh-CN="Google Ads" data-en="Google Ads">Google Ads</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Entrepreneurship Course -->
-                    <div class="certificate-card">
-                        <div class="certificate-image">
-                            <img src="image/创业复盘课.jpeg" alt="創業復盤課" class="cert-image">
-                            <div class="certificate-overlay">
-                                <div class="cert-platform" data-zh-TW="一堂" data-zh-CN="一堂" data-en="YiTang">一堂</div>
-                                <div class="cert-status">
-                                    <span class="status-badge graduate" data-zh-TW="學霸學員畢業" data-zh-CN="学霸学员毕业" data-en="Top Student Graduate">學霸學員畢業</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="certificate-content">
-                            <h3 data-zh-TW="創業復盤課程" data-zh-CN="创业复盘课程" data-en="Entrepreneurship Review Course">創業復盤課程</h3>
-                            <div class="cert-tags">
-                                <span class="cert-tag" data-zh-TW="創業思維" data-zh-CN="创业思维" data-en="Entrepreneurial Thinking">創業思維</span>
-                                <span class="cert-tag" data-zh-TW="商業模式" data-zh-CN="商业模式" data-en="Business Model">商業模式</span>
-                                <span class="cert-tag" data-zh-TW="復盤方法論" data-zh-CN="复盘方法论" data-en="Review Methodology">復盤方法論</span>
+                            <div class="influence-item">
+                                <i class="fas fa-medal"></i>
+                                <span data-zh-TW="2025羅技智簡大賽亞軍" data-zh-CN="2025罗技智简大赛亚军" data-en="2025 Logitech Smart Brief Competition Runner-up">2025羅技智簡大賽亞軍</span>
                             </div>
                         </div>
                     </div>
@@ -634,9 +471,8 @@
     </footer>
 
     <!-- Floating Portfolio Button -->
-    <a href="portfolio.html" class="floating-portfolio-btn" data-tooltip="查看作品集" data-zh-TW="查看作品集" data-zh-CN="查看作品集" data-en="View Portfolio">
+    <a href="portfolio.html" class="floating-portfolio-btn" data-tooltip="查看作品集">
         <i class="fas fa-briefcase"></i>
-        <span data-zh-TW="作品集" data-zh-CN="作品集" data-en="Portfolio">作品集</span>
     </a>
 
     <script src="script.js"></script>
